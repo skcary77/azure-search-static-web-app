@@ -76,6 +76,7 @@ def new_shape(docs):
         new_api_shape["books_count"] = item["books_count"]
         new_api_shape["isbn"] = item["isbn"]
         new_api_shape["isbn13"] = item["isbn13"]
+        new_api_shape["author"] = item["author"]
         new_api_shape["authors"] = item["authors"]
         new_api_shape["original_publication_year"] = item["original_publication_year"]
         new_api_shape["original_title"] = item["original_title"]

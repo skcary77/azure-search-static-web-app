@@ -9,6 +9,7 @@
         public decimal? books_count { get; set; }
         public string isbn { get; set; }
         public string isbn13 { get; set; }
+        public string author { get; set; }
         public string[] authors { get; set; }
         public decimal? original_publication_year { get; set; }
         public string original_title { get; set; }

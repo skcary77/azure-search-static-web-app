@@ -72,6 +72,15 @@ namespace AzureSearch.BulkInsert
                 IsHidden = false, // Sets IsRetrievable to true, when false
                 IsSortable = false
             },
+            new SearchField("author", SearchFieldDataType.String)
+            {
+                IsFacetable = false,
+                IsFilterable = true,
+                IsHidden = false, // Sets IsRetrievable to true, when false
+                IsSearchable = true,
+                IsSortable = false,
+                AnalyzerName = "standard.lucene"
+            },
             new SearchField("authors", SearchFieldDataType.Collection(SearchFieldDataType.String))
             {
                 IsFacetable = true,
