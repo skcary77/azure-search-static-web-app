@@ -1,9 +1,0 @@
-POST http://localhost:7071/api/search HTTP/1.1
-content-type: application/json
-
-{
-    "q": "dog",
-    "top": 3,
-    "skip": 5
-
-}
