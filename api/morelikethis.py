@@ -2,6 +2,7 @@ import logging
 import azure.functions as func
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
+from azure.core.rest import HttpRequest
 from shared_code import azure_config
 import json
 
@@ -61,24 +62,57 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info(f"/MoreLikeThis page_id = {page_id}")
         
         try:
-            # Use the more_like_this functionality of Azure Search
-            search_results = search_client.search(
-                search_text="",
-                more_like_this=page_id,
-                top=5,  # Only get top 5 results as requested
-                include_total_count=True,
+            # Create the request body for the More Like This query
+            request_body = {
+                "search": "",
+                "moreLikeThis": page_id,
+                "top": 5,
+                "count": True
+            }
+            
+            # Create the HTTP request for the search endpoint
+            request = HttpRequest(
+                method="POST",
+                url=f"{endpoint}/indexes/{index_name}/docs/search",
+                params={"api-version": "2023-11-01"},
+                headers={
+                    "Content-Type": "application/json",
+                    "api-key": key
+                },
+                content=json.dumps(request_body)
             )
             
-            returned_docs = new_shape(search_results)
+            # Send the request using the search client's send_request method
+            response = search_client.send_request(request)
             
-            # Format the response similar to search results
-            full_response = {}
-            full_response["count"] = search_results.get_count()
-            full_response["results"] = returned_docs
-            
-            return func.HttpResponse(
-                body=json.dumps(full_response), mimetype="application/json", status_code=200
-            )
+            # Check if the request was successful
+            if response.status_code == 200:
+                response_data = response.json()
+                
+                # Extract the documents from the response
+                documents = response_data.get("value", [])
+                
+                # Transform the documents to match the expected shape
+                returned_docs = new_shape(documents)
+                
+                # Format the response similar to search results
+                full_response = {}
+                full_response["count"] = response_data.get("@odata.count", len(documents))
+                full_response["results"] = returned_docs
+                
+                return func.HttpResponse(
+                    body=json.dumps(full_response), 
+                    mimetype="application/json", 
+                    status_code=200
+                )
+            else:
+                error_message = f"Azure Search API returned status code {response.status_code}"
+                logging.error(error_message)
+                return func.HttpResponse(
+                    body=json.dumps({"error": error_message}), 
+                    mimetype="application/json", 
+                    status_code=response.status_code
+                )
             
         except Exception as e:
             logging.error(f"Error in MoreLikeThis: {str(e)}")
