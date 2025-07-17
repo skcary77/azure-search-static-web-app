@@ -1,5 +1,4 @@
 # Readme: Static Web App for Azure AI Search
-# adding line to trigger deployment
 
 This code sample builds a web site on Azure to search through a catalog of books. Searchable content is indexed and queried on Azure AI Search, and a static web app provides the search experience.
 
