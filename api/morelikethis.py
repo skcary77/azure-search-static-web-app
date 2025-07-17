@@ -62,24 +62,21 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info(f"/MoreLikeThis page_id = {page_id}")
         
         try:
-            # Create the request body for the More Like This query
-            request_body = {
-                "search": "",
-                "moreLikeThis": page_id,
-                "top": 5,
-                "count": True
-            }
-            
-            # Create the HTTP request for the search endpoint
+            # Create the HTTP request for the MoreLikeThis query
+            # MoreLikeThis uses GET request to /docs endpoint with moreLikeThis as query parameter
             request = HttpRequest(
-                method="POST",
-                url=f"{endpoint}/indexes/{index_name}/docs/search",
-                params={"api-version": "2023-11-01"},
+                method="GET",
+                url=f"{endpoint}/indexes/{index_name}/docs",
+                params={
+                    "api-version": "2023-11-01",
+                    "moreLikeThis": page_id,
+                    "top": 5,
+                    "count": "true"
+                },
                 headers={
                     "Content-Type": "application/json",
                     "api-key": key
-                },
-                content=json.dumps(request_body)
+                }
             )
             
             # Send the request using the search client's send_request method
