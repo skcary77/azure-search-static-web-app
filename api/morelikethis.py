@@ -68,7 +68,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 method="GET",
                 url=f"{endpoint}/indexes/{index_name}/docs",
                 params={
-                    "api-version": "2023-11-01",
+                    "api-version": "2024-05-01-preview",
                     "moreLikeThis": page_id,
                     "top": 5,
                     "count": "true"
