@@ -8,7 +8,8 @@ import json
 environment_vars = azure_config()
 
 # Set Azure Search endpoint and key
-endpoint = f'https://{environment_vars["search_service_name"]}.search.windows.net'
+service_name = environment_vars["search_service_name"]
+endpoint = f"https://{service_name}.search.windows.net"
 key = environment_vars["search_api_key"]
 
 # Your index name
@@ -77,7 +78,6 @@ def new_shape(docs):
         new_api_shape["books_count"] = item["books_count"]
         new_api_shape["isbn"] = item["isbn"]
         new_api_shape["isbn13"] = item["isbn13"]
-        new_api_shape["author"] = item["author"]
         new_api_shape["authors"] = item["authors"]
         new_api_shape["original_publication_year"] = item["original_publication_year"]
         new_api_shape["original_title"] = item["original_title"]
