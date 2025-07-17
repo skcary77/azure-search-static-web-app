@@ -14,12 +14,12 @@ key = environment_vars["search_api_key"]
 
 # Your index name
 # environment_vars["search_index_name"]
-index_name = "good-books"
+index_name = "page-content-index"
 
 # Create Azure SDK client
 search_client = SearchClient(endpoint, index_name, AzureKeyCredential(key))
 
-# returns obj like {authors: 'array', language_code:'string'}
+# returns obj like {organizations: 'array', author:'string'}
 def read_facets(facetsString):
     facets = facetsString.split(",")
     output = {}
@@ -71,29 +71,21 @@ def new_shape(docs):
         new_document["highlights"] = item["@search.highlights"]
 
         new_api_shape = {}
-        new_api_shape["id"] = item["id"]
-        new_api_shape["goodreads_book_id"] = item["goodreads_book_id"]
-        new_api_shape["best_book_id"] = item["best_book_id"]
-        new_api_shape["work_id"] = item["work_id"]
-        new_api_shape["books_count"] = item["books_count"]
-        new_api_shape["isbn"] = item["isbn"]
-        new_api_shape["isbn13"] = item["isbn13"]
-        new_api_shape["authors"] = item["authors"]
-        new_api_shape["original_publication_year"] = item["original_publication_year"]
-        new_api_shape["original_title"] = item["original_title"]
-        new_api_shape["title"] = item["title"]
-        new_api_shape["language_code"] = item["language_code"]
-        new_api_shape["average_rating"] = item["average_rating"]
-        new_api_shape["ratings_count"] = item["ratings_count"]
-        new_api_shape["work_ratings_count"] = item["work_ratings_count"]
-        new_api_shape["work_text_reviews_count"] = item["work_text_reviews_count"]
-        new_api_shape["ratings_1"] = item["ratings_1"]
-        new_api_shape["ratings_2"] = item["ratings_2"]
-        new_api_shape["ratings_3"] = item["ratings_3"]
-        new_api_shape["ratings_4"] = item["ratings_4"]
-        new_api_shape["ratings_5"] = item["ratings_5"]
-        new_api_shape["image_url"] = item["image_url"]
-        new_api_shape["small_image_url"] = item["small_image_url"]
+        new_api_shape["id"] = item["page_id"]
+        new_api_shape["page_id"] = item["page_id"]
+        new_api_shape["journal"] = item["journal"]
+        new_api_shape["published_at"] = item["published_at"]
+        new_api_shape["author"] = item["author"]
+        new_api_shape["persons"] = item["persons"]
+        new_api_shape["companies"] = item["companies"]
+        new_api_shape["industries"] = item["industries"]
+        new_api_shape["tags"] = item["tags"]
+        new_api_shape["categories"] = item["categories"]
+        new_api_shape["primary_channels"] = item["primary_channels"]
+        new_api_shape["secondary_channels"] = item["secondary_channels"]
+        new_api_shape["page_content"] = item["page_content"]
+        new_api_shape["people"] = item["people"]
+        new_api_shape["organizations"] = item["organizations"]
 
         new_document["document"] = new_api_shape
 

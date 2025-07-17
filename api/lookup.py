@@ -13,7 +13,7 @@ key = environment_vars["search_api_key"]
 
 # Your index name
 # environment_vars["search_index_name"]
-index_name = "good-books"
+index_name = "page-content-index"
 
 # Create Azure SDK client
 search_client = SearchClient(endpoint, index_name, AzureKeyCredential(key))
