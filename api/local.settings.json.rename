@@ -6,8 +6,8 @@
     "FUNCTIONS_WORKER_RUNTIME": "python",
     "SearchApiKey": "YOUR-SEARCH-QUERY-KEY",
     "SearchServiceName": "YOUR-SEARCH-RESOURCE-NAME",
-    "SearchIndexName": "good-books",
-    "SearchFacets": "authors*,language_code"
+    "SearchIndexName": "page-content-index",
+    "SearchFacets": "author,journal,industries,tags,primary_channels,secondary_channels,organizations*,people*"
   },
   "Host": {
     "CORS": "*"
