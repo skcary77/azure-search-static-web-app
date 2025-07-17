@@ -86,3 +86,10 @@
     text-align: left;
 }
 
+
+/* Left-justify article content */
+.article-content {
+  text-align: left;
+  margin-top: 10px;
+  white-space: pre-wrap;
+}

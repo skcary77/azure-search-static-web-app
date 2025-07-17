@@ -6,14 +6,15 @@
 .results {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     margin: auto;
     margin-left: 0em;
     margin-right: 0em;
+    gap: 20px;
 }
 
 .results .result {
-    width: 10rem;
-    max-height: 18rem;
+    width: 450px;
+    max-height: none;
 }

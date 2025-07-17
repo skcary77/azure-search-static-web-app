@@ -6,7 +6,6 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 import fetchInstance from '../../url-fetch';
-import MoreLikeThis from '../../components/MoreLikeThis/MoreLikeThis';
 
 import "./Details.css";
 
@@ -75,12 +74,6 @@ export default function BasicTabs() {
     return '';
   };
 
-  // Create document without page_content for Raw Data tab
-  const getDocumentWithoutContent = () => {
-    const { page_content, ...docWithoutContent } = document;
-    return docWithoutContent;
-  };
-
   if (isLoading || !id || Object.keys(document).length === 0) {
     return (
       <div className="loading-container">
@@ -96,7 +89,6 @@ export default function BasicTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="page-details-tabs">
           <Tab label="Article" />
           <Tab label="Raw Data" />
-          <Tab label="MoreLikeThis" />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0} className="tab-panel box-content">
@@ -148,7 +140,7 @@ export default function BasicTabs() {
           )}
           <div className="card-text">
             <strong>Content:</strong>
-            <div className="article-content">
+            <div style={{ marginTop: '10px', whiteSpace: 'pre-wrap' }}>
               {getContent()}
             </div>
           </div>
@@ -157,12 +149,9 @@ export default function BasicTabs() {
       <CustomTabPanel value={value} index={1} className="tab-panel">
         <div className="card-body text-left card-text details-custom-tab-panel-json-div" >
           <pre><code>
-            {JSON.stringify(getDocumentWithoutContent(), null, 2)}
+            {JSON.stringify(document, null, 2)}
           </code></pre>
         </div>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2} className="tab-panel">
-        <MoreLikeThis pageId={id} />
       </CustomTabPanel>
     </Box>
   );

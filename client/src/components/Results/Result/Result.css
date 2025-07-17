@@ -1,12 +1,12 @@
 .result {
-    width: 300px;
-    padding: 8px;
+    width: 450px;
+    padding: 15px;
     text-align: center;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     margin: 10px;
-    margin-bottom: 3px;
-    padding-bottom: 3px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -24,31 +24,36 @@
 }
 
 .title-style {
-    font-size: 0.9em;
+    font-size: 1.1em;
     vertical-align: middle;
     white-space: normal; /* Allow wrapping to multiple lines */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box; /* Use flexbox for multi-line ellipsis */
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
-    -webkit-box-orient: vertical;
+    overflow: visible;
+    text-overflow: none;
+    display: block;
     line-height: 1.4em; /* Adjust line height for better spacing */
-    max-height: 2.8em; /* Ensure height fits 2 lines */
-    margin: 0; /* Remove any extra margin */
+    margin: 0 0 10px 0; /* Add bottom margin */
     color: #0078d7;
+    min-height: 2.8em; /* Ensure consistent height */
 }
 
 .card-body {
-    padding: 0 !important;
+    padding: 10px !important;
     margin: 0;
     text-align: center;
-    height: 3.2em; /* Fixed height to support 2 rows of text */
-    display: flex; /* Use flexbox for alignment */
-    justify-content: center; /* Center the text horizontally */
-    align-items: center; /* Center the text vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     box-shadow: none !important;
     border: none !important;
+    height: auto;
 }
+
+.card-text {
+    margin: 2px 0;
+    font-size: 0.9em;
+}
+
 .result a {
     text-decoration: none; /* Remove underline from links */
 }
